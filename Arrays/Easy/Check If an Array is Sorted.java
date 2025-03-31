@@ -12,6 +12,45 @@
    Explanation: The given array is sorted i.e Every element in the array is smaller than or equals to its next values, So the answer is True.
  */
 
+My Approach -->
+
+class Solution {
+    public boolean check(int[] nums) {
+        int n = nums.length;
+        int count = 0;
+        int pivot = -1; // Stores the index where sorting order breaks
+
+        // Step 1: Find the pivot (where the array order is violated)
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] > nums[i + 1]) { // If current element > next element, a break is found
+                pivot = i + 1; // The next element is the smallest (pivot point)
+            }
+        }
+
+        // Step 2: If no pivot is found, array is already sorted, return true
+        if (pivot == -1) {
+            return true;
+        }
+
+        // Step 3: Check if the first part (0 to pivot-1) is sorted in non-decreasing order
+        for (int i = 0; i < pivot - 1; i++) {
+            if (nums[i] > nums[i + 1]) { // If previous element > next element, it's not sorted
+                return false;
+            }
+        }
+
+        // Step 4: Check if the second part (pivot to n-1) is sorted in non-decreasing order
+        for (int i = pivot; i < nums.length - 1; i++) {
+            if (nums[i] > nums[i + 1]) { // If previous element > next element, it's not sorted
+                return false;
+            }
+        }
+
+        // Step 5: Ensure circular rotation is valid (last element should be ≤ first element)
+        return nums[0] >= nums[nums.length - 1];
+    }
+}
+
 
 public class Check_If_Sorted_Array {
     public static boolean checkSorted(int[] arr){
