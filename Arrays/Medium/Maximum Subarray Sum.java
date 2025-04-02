@@ -26,9 +26,27 @@
 
 public class Maximum_Subarray_Sum {
     public static int maxSubArray(int[] nums) {
-        /*
-         * BruteForce Solution: --> Time Complexity: O(N^2) & Space Complexity: O(1):
-         * In this we find all possible subarrays sum and then find the maximum among them.
+          
+        // BruteForce Solution: --> Time Complexity: O(N^2) & Space Complexity: O(1):
+          class Solution {
+                public int maxSubarraySum(int[] nums) {
+                    int maxSum = Integer.MIN_VALUE;
+                    
+                    for(int i = 0; i < nums.length; i++) {
+                        for(int j = i; j < nums.length; j++) {
+                            int sum = 0; // Reset sum for each subarray
+                            for(int k = i; k <= j; k++) {  // Iterate from i to j
+                                sum += nums[k];  // Add elements of subarray
+                            }
+                            maxSum = Math.max(maxSum, sum); // Track max sum
+                        }
+                    }
+                    return maxSum;
+                }
+            }
+
+        //Better
+            * In this we find all possible subarrays sum and then find the maximum among them.
          * int maxSum = Integer.MIN_VALUE;
            for(int i = 0; i < nums.length; i++){
                int sum = 0;
@@ -39,11 +57,10 @@ public class Maximum_Subarray_Sum {
            }
            return maxSum;
 
-        */
         
         // Optimized Solution: Using Kadane's algorithm
         // Time complexity: O(N) & Space Complexity: O(1).
-
+            *** Kadane's Algo
         int maxSum = Integer.MIN_VALUE;
         int currSum = 0;
         for(int i = 0; i < nums.length; i++){
