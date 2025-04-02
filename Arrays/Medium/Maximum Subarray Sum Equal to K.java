@@ -30,20 +30,25 @@
 public class Subarray_Sum_Equal_to_K {
     public static void subArrWithSumK(int nums[], int k)
     {
-        /*Bruteforce Approach: Time complexity: O(N^2) & Space Complexity: O(1).
-        for(int i = 0; i < nums.length; i++){
-            int sum = 0;
-            for(int j = i; j < nums.length; j++){
-                sum += nums[j];
-                if(sum == k){
-                    for(int m = i; m <= j; m++){
-                        System.out.print(nums[m] + " ");
-                    }
-                    System.out.println();
-                }
+        ***
+        // Bruteforce Approach: Time complexity: O(N^2) & Space Complexity: O(1).
+       class Solution {
+          public int subarraySum(int[] nums, int k) {
+              int count = 0;
+      
+              for(int i = 0 ; i < nums.length ; i++){
+                  int sum = 0;
+                  for(int j = i ; j < nums.length ; j++){
+                      sum = sum + nums[j];
+                      if(sum == k){
+                          count++;
+                      }
             }
         }
-        */ 
+        return count;
+    }
+}
+        
 
         // Optimized Solution: Time Complexity: O(N) to find subarray and O(N) to print subarray & Space complexity: O(1)
         int start = 0, end = -1, sum = 0;
