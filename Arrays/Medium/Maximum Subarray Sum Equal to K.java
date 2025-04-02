@@ -51,21 +51,25 @@ public class Subarray_Sum_Equal_to_K {
         
 
         // Optimized Solution: Time Complexity: O(N) to find subarray and O(N) to print subarray & Space complexity: O(1)
-        int start = 0, end = -1, sum = 0;
-        while (start < nums.length) {
-          while ((end + 1 < nums.length) && (sum + nums[end + 1] <= k)){
-            sum += nums[++end];
-          }
-          if (sum == k) {
-            for (int p = start; p <= end; p++)
-              System.out.print(nums[p] + " ");
-            System.out.println();
-          }
-    
-          sum -= nums[start];
-          start++;
-        }  
-    }
+        import java.util.HashMap;
+
+            class Solution {
+                public int subarraySum(int[] nums, int k) {
+                    int sum = 0, count = 0;
+                    HashMap<Integer, Integer> map = new HashMap<>();
+                    map.put(0, 1); // Base case for subarrays starting at index 0
+            
+                    for (int num : nums) {
+                        sum += num;
+                        if (map.containsKey(sum - k)) {
+                            count += map.get(sum - k); // Count valid subarrays
+                        }
+                        map.put(sum, map.getOrDefault(sum, 0) + 1);
+                    }
+                    return count;
+                }
+            }
+
 
     public static void main(String[] args) {
         int[] nums = { 1, 9, 3, 7 };
