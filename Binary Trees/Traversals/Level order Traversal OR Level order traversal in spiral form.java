@@ -19,8 +19,21 @@
    
 //    Example 2:
 //    5 10 15
-   
 
+// Use a Queue (BFS Traversal) → Process nodes level by level using a Queue<TreeNode>.
+
+/*
+   Push the Root Node → Start by adding root to the queue.
+   Iterate Until Queue is Empty:
+   Get the number of nodes at the current level (size = q.size()).
+   Process each node:
+   Remove from the queue and store its value.
+   Add its left and right children (if they exist) to the queue.
+   Store the current level’s values in the result list.
+   Return the Final List → Contains all levels in separate lists.
+*/
+
+TC: O(N), SC: O(N) 🚀
 
 import java.util.Queue;
 import java.util.List;
