@@ -14,6 +14,24 @@
    Input: root = []
    Output: []
 */
+class Solution {
+    // Function to return list containing elements of left view of binary tree.
+    ArrayList<Integer> leftView(Node root) {
+        ArrayList<Integer> list = new ArrayList<>();
+        return leftV(root,list,0);
+    }
+    
+    public ArrayList<Integer> leftV(Node root,ArrayList<Integer> list,int level){
+        if(root == null)return list ;
+        if(list.size() == level){
+            list.add(root.data);
+        }
+        leftV(root.left,list,level+1);
+        leftV(root.right,list,level+1);
+        return list;
+    }
+}
+
 
 import java.util.List;
 // import java.util.Queue;
