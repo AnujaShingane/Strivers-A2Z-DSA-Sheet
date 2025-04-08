@@ -22,20 +22,39 @@
 public class Remove_duplicates_from_Sorted_array {
     public static int removeDuplicates(int[] nums) {
         /*
-         * BruteForce Appraoch:
-         * Time complexity: O(N) & Space complexity: O(N)
-         * HashSet<Integer> set = new HashSet<>();
-         * for(int i = 0; i < nums.length; i++){
-         * set.add(nums[i]);
-         * }
-         * int k = set.size();
-         * int i = 0;
-         * for(int value: set){
-         * nums[i++] = value;
-         * }
-         * return k;
+         class Solution {
+             public int removeDuplicates(int[] nums) {
+                 Set<Integer> set = new LinkedHashSet<>();
+         
+                 for(int num : nums){
+                     set.add(num);
+                 }
+         
+                 int i = 0;
+                 for(int val : set){
+                     nums[i++] = val;
+                 }
+         
+                 return i;
+             }
+         }
          */
-        
+my version--
+       class Solution {
+          public int removeDuplicates(int[] nums) {
+              int i = 0, j = 1;
+      
+              while(j != nums.length){
+                  if(nums[i] != nums[j]){
+                      nums[i+1] = nums[j];
+                      i++;
+                  }else{
+                      j++;
+                  }
+              }
+              return i+1;
+          }
+      }
         // Solution 2: Time Complexity: O(N) & Space Complexity: O(1)
         int i = 0;
         for (int j = 1; j < nums.length; j++) {
