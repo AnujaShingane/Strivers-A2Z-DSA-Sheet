@@ -22,7 +22,23 @@
    Explanation :
    4th smallest element in the given array is 15.
 */
+Min-Heap: O(N log N) time, O(N) space – push all, pop k-1 → simple but less efficient;
+Max-Heap of size K: O(N log K) time, O(K) space – keep only K smallest → optimal when K ≪ N.
 
+   
+class Solution {
+    public static int kthSmallest(int[] arr, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        
+        for(int i = 0 ; i < arr.length ; i++){
+            pq.add(arr[i]);
+            if(pq.size() > k){
+                pq.remove();
+            }
+        }
+        return pq.peek();
+    }
+}
 
 import java.util.PriorityQueue;
 
