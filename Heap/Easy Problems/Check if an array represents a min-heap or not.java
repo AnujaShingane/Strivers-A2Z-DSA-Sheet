@@ -14,7 +14,21 @@
    The tree follows max-heap property as every
    node is less than all of its descendants.
  */
-
+my--
+class Solution {
+    public boolean countSub(long arr[], long n)
+    {
+        for(int i = 0 ; i < arr.length; i++){
+            if(2*i+1 < n && arr[2*i+1] > arr[i]){
+                return false;
+            }
+            if(2*i+2 < n && arr[2*i+2] > arr[i]){
+                return false;
+            }
+        }
+        return true;
+    }
+}
 
 public class Check_if_an_array_represents_a_min_heap_or_not {
     public static boolean countSub(long arr[])
