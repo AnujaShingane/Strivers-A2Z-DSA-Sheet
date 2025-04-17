@@ -11,45 +11,73 @@
 
 Solution 1: BruteForce Approach:-
   
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-        if(lists == null || lists.length == 0) return null;
-        ListNode head = new ListNode();
-        ListNode temp = head;
-        List<Integer> l = new ArrayList<>();
-        for(ListNode list : lists){
-            while(list != null){
-                l.add(list.val);
-                list = list.next;
+        ArrayList<Integer> list = new ArrayList<>();
+        for(ListNode temp : lists){
+            while(temp!= null){
+                list.add(temp.val);
+                temp = temp.next;
             }
         }
-        Collections.sort(l);
-        for(int val : l){
-            temp.next = new ListNode(val);
-            temp = temp.next;
+
+        Collections.sort(list);
+
+        ListNode dummy = new ListNode(-1);
+        ListNode curr = dummy;
+
+        for(int i = 0 ; i < list.size() ; i++){
+            curr.next = new ListNode(list.get(i));
+            curr = curr.next;
         }
-        return head.next;
+        return dummy.next;
     }
 }
 
 Solution 2: Optimized Approach:
 
-public ListNode mergeKLists(ListNode[] lists) {
-        Queue<ListNode> q = new PriorityQueue<ListNode>((a,b) -> a.val - b.val);
-        // only head pointer of all lists are added
-        for(ListNode l : lists){
-            if(l!=null){
-                q.add(l);
-            }        
-        }
-        ListNode head = new ListNode(-1);
-        ListNode point = head;
-        while(!q.isEmpty()){ 
-            point.next = q.poll();
-            point = point.next; 
-            if(point.next!=null){
-                q.add(point.next); // add next of current smallest
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        PriorityQueue<ListNode> pq = new PriorityQueue<>((a,b) -> a.val-b.val);
+
+        for(ListNode node : lists){
+            if(node != null){
+                pq.add(node);
             }
         }
-        return head.next;
+
+        ListNode dummy = new ListNode(-1);
+        ListNode curr = dummy;
+
+        while(!pq.isEmpty()){
+            ListNode rem = pq.remove();
+            curr.next = rem;
+            curr = curr.next;
+
+            if(rem.next != null){
+                pq.add(rem.next);
+            }
+        }
+        return dummy.next;
     }
+}
