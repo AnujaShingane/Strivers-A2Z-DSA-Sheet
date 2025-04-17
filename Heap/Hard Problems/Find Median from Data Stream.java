@@ -27,43 +27,40 @@
    medianFinder.addNum(3);    // arr[1, 2, 3]
    medianFinder.findMedian(); // return 2.0
 */
-
-import java.util.PriorityQueue;
-import java.util.Collections;
-
 class MedianFinder {
-    PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
-    PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+    PriorityQueue<Integer> left ;
+    PriorityQueue<Integer> right ;
+    
     public MedianFinder() {
-        
+        left = new PriorityQueue<>(Collections.reverseOrder());
+        right = new PriorityQueue<>();
     }
     
     public void addNum(int num) {
-        if(maxHeap.isEmpty() || maxHeap.peek() >= num){
-            maxHeap.add(num);
-        }
-        else{
-            minHeap.add(num);
-        }
-
-        if(maxHeap.size() > minHeap.size() + 1){
-            minHeap.add(maxHeap.poll());
-        }
-        else if(maxHeap.size() < minHeap.size()){
-            maxHeap.add(minHeap.poll());
+        if(left.size() == right.size()){ //coming oddth ele
+            right.add(num);
+            left.add(right.remove());
+        }else{ // eventh ele coming
+            left.add(num);
+            right.add(left.remove());
         }
     }
     
     public double findMedian() {
-        // In Case Of Even
-        if(maxHeap.size() == minHeap.size()){
-            return maxHeap.peek()/2.0 + minHeap.peek()/2.0;
+        if(left.size() == right.size()){
+            return (left.peek() + right.peek())*1.0/2 ;
+        }else{
+            return left.peek() * 1.0;
         }
-        // In Case of Odd
-        return maxHeap.peek();
     }
 }
 
+/**
+ * Your MedianFinder object will be instantiated and called as such:
+ * MedianFinder obj = new MedianFinder();
+ * obj.addNum(num);
+ * double param_2 = obj.findMedian();
+ */
 public class Find_Median_from_Data_Stream {
     public static void main(String[] args) {
         MedianFinder m = new MedianFinder();
