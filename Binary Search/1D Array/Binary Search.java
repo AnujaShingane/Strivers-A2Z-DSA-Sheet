@@ -38,8 +38,8 @@ class Binary_Search{
             else{
                 start = mid + 1;
             }
-        } 
-        return -1;       
+        }
+        return -1;
     }
     public static void main(String[] args) {
         int[] nums = {-1,0,3,5,9,12};
