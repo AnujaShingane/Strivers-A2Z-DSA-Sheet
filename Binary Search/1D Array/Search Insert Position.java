@@ -35,6 +35,7 @@ public class Search_Insert_Position_In_An_Array {
             return nums.length;
         */
 
+        Same as lower bound
         // Solution 2: Optimized --> Time complexity: O(logN) & Space complexity: O(1).
         int low = 0;
         int high = nums.length - 1;
