@@ -26,27 +26,29 @@ public class Implement_Upper_Bound_In_Sorted_Array {
         
         // Solution 2: Optimized
         // Time complexity: O(logN) & Space complexity: O(1).
-        
-        int result = -1;
-        int start = 0;
-        int end = nums.length - 1;
-        while(start <= end){
-            int mid = start + (end - start)/2;
-            if(nums[mid] == target){
-                return mid;
-            }
-            else if(nums[mid] > target){
-                end = mid - 1;
-                if(nums[mid] > target){
-                    result = mid;
-                }
-            }
-            else{
-                start = mid + 1;                
-            }
-        } 
-        return result;  
-    }
+         my--
+        class Solution {
+          public int searchInsert(int[] nums, int target) {
+              int n = nums.length;
+              int low = 0 ;
+              int high = n-1;
+              int ans = n; // hypothetical ans (last ind. +1)
+      
+              while(low <= high){
+                  int mid = (low + high)/2;
+                  //maybe an answer
+                  if(nums[mid] > target){
+                      ans = mid;
+                      //look for more smaller index on left
+                      high = mid-1;
+                  }
+                  else{
+                      low = mid + 1; // look for right
+                  }
+              }
+              return ans;
+          }
+      }
     public static void main(String[] args) {
         int[] nums = {1,2,8,10,11,12,19};
         int target = 5;
