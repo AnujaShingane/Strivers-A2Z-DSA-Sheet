@@ -16,64 +16,59 @@
    Explanation: 2 is occurring 5 times in the given array so it is our answer.
 */
 
-
-public class Count_Occurrences_in_Sorted_Array {
-    public static int search(int[] arr, int target, boolean findStartIndex){
-        int start = 0;
-        int end = arr.length - 1;
+class Solution {
+    public int firstOcc(int[] arr, int target){
+        int n = arr.length;
+        int low = 0;
+        int high = n-1;
         int ans = -1;
-        while(start <= end){
-            int mid = start + (end - start)/2;
+        
+        while(low <= high){
+            int mid = (low+high)/2;
+            
             if(arr[mid] == target){
                 ans = mid;
-                if(findStartIndex == true){
-                    end = mid - 1;
-                }
-                else{
-                    start = mid + 1;
-                }
-            }
-            else if(arr[mid] > target){
-                end = mid - 1;
-            }
-            else{
-                start = mid + 1;
+                high = mid -1;
+            }else if(arr[mid] < target){
+                low = mid+1;
+            }else{
+                high = mid-1;
             }
         }
         return ans;
     }
-    public static int countOccurence(int[] arr, int target){
-        /*
-         * BruteForce Solution: Time complexity: O(N) & Space complexity: O(1)
-         * int occurence = 0;
-           for(int i = 0; i < arr.length; i++){
-               if(arr[i] == x){
-                   occurence++;
-               }
-           }
-           return occurence;
-        */
 
-        // Optimized Solution: Using Binary Search: 
-        // Time complexity: O(logN) & Space complexity: O(1)
-
-        int start = -1;
-        int end = -1;
-
-        // finding first occurence.
-        start = search(arr, target, true); 
-
-        // finding last occurence.
-        end = search(arr, target, false);
+    public int lastOcc(int[] arr, int target){
+        int n = arr.length;
+        int low = 0;
+        int high = n-1;
+        int ans = -1;
         
-        // checking target is present or not.
-        if(start == -1 && end == -1){
+        while(low <= high){
+            int mid = (low+high)/2;
+            
+            if(arr[mid] == target){
+                ans = mid;
+                low = mid + 1;
+            }else if(arr[mid] < target){
+                low = mid+1;
+            }else{
+                high = mid-1;
+            }
+        }
+        return ans;
+    }
+
+    int countFreq(int[] arr, int target) {
+        int first = firstOcc(arr,target);
+        if(first == -1){
             return 0;
         }
-
-        // Occurence = last Occurence - first Occurence + 1
-        return (end - start) + 1;
+        int last = lastOcc(arr,target);
+        return last-first+1;
     }
+}
+
     public static void main(String[] args) {
         int[] arr = {1, 1, 2, 2, 2, 2, 3};
         int target = 2;
