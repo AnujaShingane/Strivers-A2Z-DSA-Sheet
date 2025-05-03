@@ -1,7 +1,7 @@
 /*
  * Given a string of lowercase alphabets, count all possible substrings (not necessarily distinct) that have exactly k distinct characters. 
 
-
+updated??
    Example 1:
    
    Input:
