@@ -18,6 +18,36 @@
 */
 
 
+
+
+real soln-->
+
+
+class Solution {
+    public int getSecondLargest(int[] arr) {
+        int n = arr.length;
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        HashSet<Integer> set = new HashSet<>();
+        
+        for(int i = 0 ; i < n ; i++){
+            if(!set.contains(arr[i])) pq.add(arr[i]);
+            set.add(arr[i]);
+            if(pq.size() > 2){
+                pq.remove();
+            }
+        }
+        
+        if(pq.size() < 2)return -1;
+        
+        return pq.peek();
+    }
+}
+
+
+
+
+
+
 import java.util.PriorityQueue;
 import java.util.Collections;
 
