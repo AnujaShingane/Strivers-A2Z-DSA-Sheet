@@ -28,8 +28,27 @@ Min-Heap: O(N log N) time, O(N) space – push all, pop k-1 → simple but less 
 Max-Heap of size K: O(N log K) time, O(K) space – keep only K smallest → optimal when K ≪ N.
 
 
-
-
+new solution-->
+   
+class Solution {
+    public int getSecondLargest(int[] arr) {
+        int n = arr.length;
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        HashSet<Integer> set = new HashSet<>();
+        
+        for(int i = 0 ; i < n ; i++){
+            if(!set.contains(arr[i])) pq.add(arr[i]);
+            set.add(arr[i]);
+            if(pq.size() > 2){
+                pq.remove();
+            }
+        }
+        
+        if(pq.size() < 2)return -1;
+        
+        return pq.peek();
+    }
+}
 
    
 class Solution {
