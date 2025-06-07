@@ -20,40 +20,31 @@
     Explanation: The 2 and -5 collide resulting in -5. The 10 and -5 collide resulting in 10.
  */
 
+class Solution {
+    public int[] asteroidCollision(int[] asteroids) {
+        int n = asteroids.length;
+        Stack<Integer> st = new Stack<>();
 
-import java.util.Arrays;
-import java.util.Stack;
-
-public class Asteroid_Collision {
-    public static int[] asteroidCollision(int[] asteroids) {
-        Stack<Integer> stack = new Stack<>();
-        for(int val : asteroids){
+        for(int i = 0 ; i < n ; i++){
+            int val = asteroids[i];
             if(val > 0){
-                stack.push(val);
-            }
-            else{
-                while(!stack.empty() && stack.peek() > 0 && stack.peek() < -val){
-                    stack.pop();
+                st.push(val);
+            }else{
+                while(!st.isEmpty() && st.peek() > 0 && Math.abs(val) > st.peek()){
+                    st.pop();
                 }
-                if(!stack.empty() && stack.peek() == -val){
-                    stack.pop();
-                }
-                else if(!stack.empty() && stack.peek() > -val){
-                    continue;
-                }
-                else{
-                    stack.push(val);
+                if(!st.isEmpty() && st.peek() > 0 && Math.abs(val) == st.peek()){
+                    st.pop();
+                }else if(st.isEmpty() || st.peek() < 0){
+                    st.push(val);
                 }
             }
         }
-        int[] ans = new int[stack.size()];
-        for(int i = ans.length - 1; i >= 0; i--){
-            ans[i] = stack.pop();
+
+        int[] ans = new int[st.size()];
+        for(int i = st.size() -1 ; i >= 0 ; i--){
+            ans[i] = st.pop();
         }
         return ans;
-    }
-    public static void main(String[] args) {
-        int[] asteriod = {-1, -2, 1, 3, 2, -3, 3};
-        System.out.println(Arrays.toString(asteroidCollision(asteriod)));
     }
 }
