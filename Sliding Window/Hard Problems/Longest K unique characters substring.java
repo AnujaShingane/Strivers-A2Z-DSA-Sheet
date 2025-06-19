@@ -18,31 +18,31 @@
    distinct characters.
  */
 
+// User function Template for Java
 
-import java.util.HashMap;
-
-public class Longest_K_unique_characters_substring {
-    public static int longestkSubstr(String s, int k) {
-        HashMap<Character, Integer> map = new HashMap<>();
-        int i = 0, max = -1;
-        for(int j = 0; j < s.length(); j++){
-            map.put(s.charAt(j), map.getOrDefault(s.charAt(j), 0) + 1);
-            while(map.size() > k){
-                map.put(s.charAt(i), map.get(s.charAt(i)) - 1);
-                if(map.get(s.charAt(i)) == 0){
-                    map.remove(s.charAt(i));
+class Solution {
+    public int longestkSubstr(String s, int k) {
+        int n = s.length();
+        int l = 0, r = 0;
+        int maxlen = -1;
+        HashMap<Character,Integer> map = new HashMap<>();
+        
+        while(r < n){
+            map.put(s.charAt(r),map.getOrDefault(s.charAt(r),0)+1);
+            
+            if(map.size() > k){
+                map.put(s.charAt(l),map.get(s.charAt(l))-1);
+                if(map.get(s.charAt(l)) == 0){
+                    map.remove(s.charAt(l));
                 }
-                i++;
+                l++;
             }
+            
             if(map.size() == k){
-                max = Math.max(max, (j - i) + 1);
+                maxlen = Math.max(maxlen, r-l+1);
             }
+            r++;
         }
-        return max;
-    }
-    public static void main(String[] args) {
-        String s = "aabacbebebe";
-        int k = 3;
-        System.out.println(longestkSubstr(s, k));
+        return maxlen;
     }
 }
