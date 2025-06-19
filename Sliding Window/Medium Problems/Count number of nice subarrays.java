@@ -21,34 +21,37 @@
    Output: 16
  */
 
-
-import java.util.HashMap;
-
-public class Count_Number_of_Nice_Subarrays {
-    public static int numberOfSubarrays(int[] nums, int k) {
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] % 2 == 0) {
-                nums[i] = 0;
-            }
-            else{
-                nums[i] = 1;
-            }
-        }
-        HashMap<Integer, Integer> map = new HashMap<>();
-        map.put(0, 1);        
-        int sum = 0, count = 0;
-        for (int i = 0; i < nums.length; i++) {
-            sum += nums[i];
-            if (map.containsKey(sum - k)) {
-                count += map.get(sum - k);
-            }
-            map.put(sum, map.getOrDefault(sum, 0) + 1);
-        }
-        return count;
+class Solution {
+    public int numberOfSubarrays(int[] nums, int k) {
+        return number(nums, k) - number(nums, k-1);
     }
-    public static void main(String[] args) {
-        int[] nums = {1,1,2,1,1};
-        int k = 3;
-        System.out.println(numberOfSubarrays(nums, k));
+
+    public int number(int[] nums, int k) {
+        int n = nums.length;
+        int l = 0 , r = 0;
+        int cnt = 0;
+        int sum = 0;
+
+        if(k < 0) return 0;
+
+        for(int i = 0 ; i < n ; i++){
+            if(nums[i]%2 == 0)nums[i] = 0;
+            else nums[i] = 1;
+        }
+
+        while(r < n){
+            sum += nums[r];
+
+            while(sum > k){
+                sum -= nums[l];
+                l++;
+            }
+
+            if(sum <= k){
+                cnt += r-l+1;
+            }
+            r++;
+        }
+        return cnt;
     }
 }
