@@ -27,7 +27,7 @@ class Solution {
         Arrays.fill(index,-1);
 
         while(r < n){
-            if(s.charAt(r) != 0 && index[s.charAt(r)] >= l){
+            if(index[s.charAt(r)] >= l){
                 l = index[s.charAt(r)]+1;
             }
 
