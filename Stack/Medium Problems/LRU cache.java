@@ -1,3 +1,14 @@
+Doubly Linked List :
+NULL <- [ HEAD ] <-> [ 4:Four ] <-> [ 1:One ] <-> [ 2:Two ] <-> [ TAIL ] -> NULL
+
+    HashMap:
+{
+  1 → [1:One],
+  2 → [2:Two],
+  4 → [4:Four]
+}
+
+
 class Node{
     int key, val;
     Node prev, next;
