@@ -5,6 +5,15 @@
       ⊛ Time Complexity: O(N ) & Space Complexity: O(1).
 
 
+
+
+
+            
+            We loop through the array once. We maintain two variables: currentSum and maxSum.
+            At each step, we add the current number to currentSum.
+            If currentSum becomes negative, we reset it to 0 — because a negative sum won’t help our future subarrays.
+            After each addition, we update maxSum if currentSum is larger.
+
 /*
  * Kadane’s Algorithm : Maximum Subarray Sum in an Array
    Problem Statement: Given an integer array arr, find the contiguous subarray (containing at least one number) which
