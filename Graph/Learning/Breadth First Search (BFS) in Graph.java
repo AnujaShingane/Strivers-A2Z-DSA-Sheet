@@ -36,6 +36,38 @@
    so starting from 0, it will go to 1 then 2,
    thus bfs will be 0 1 2. 
 */
+
+
+
+
+
+
+
+public static ArrayList<Integer> bfsOfGraph(int n, ArrayList<ArrayList<Integer>> adj) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        boolean[] vis = new boolean[n];
+        Queue<Integer> q = new LinkedList<>();
+        q.add(0); //0-based indexing
+        vis[0] = true;
+
+        while(!q.isEmpty()){
+            int rem = q.poll();
+            ans.add(rem);
+
+            for(int num : list.get(rem)){
+                if(vis[num] == false){
+                    vis[num] = true;
+                    q.add(num);
+                }
+            }
+        }
+        return ans;
+    }
+
+
+
+
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
