@@ -1,3 +1,15 @@
+// Find the Row:
+// Go through each row.
+// If the target lies between the first and last element of the row, it might be present in that row.
+// Save the row index.
+// Binary Search in that Row:
+// If a valid row is found, perform binary search in that row to check if the target exists.
+// Return Result:
+// If binary search finds it → return true.
+// Else → return false.
+
+
+
 class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
         int rows = matrix.length;
