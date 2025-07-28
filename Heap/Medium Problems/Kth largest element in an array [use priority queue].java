@@ -21,30 +21,22 @@
 
 
 real soln-->
-
-
 class Solution {
-    public int getSecondLargest(int[] arr) {
-        int n = arr.length;
+    public int findKthLargest(int[] nums, int k) {
         PriorityQueue<Integer> pq = new PriorityQueue<>();
-        HashSet<Integer> set = new HashSet<>();
-        
-        for(int i = 0 ; i < n ; i++){
-            if(!set.contains(arr[i])) pq.add(arr[i]);
-            set.add(arr[i]);
-            if(pq.size() > 2){
+
+        for(int i = 0 ; i < nums.length ; i++){
+            pq.add(nums[i]);
+            if(pq.size() > k){
                 pq.remove();
             }
         }
-        
-        if(pq.size() < 2)return -1;
-        
         return pq.peek();
     }
 }
 
-
-
+// Time Complexity	O(n log k)
+// Space Complexity	O(k)
 
 
 
