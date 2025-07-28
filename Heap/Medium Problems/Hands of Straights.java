@@ -20,34 +20,31 @@
  */
 class Solution {
     public boolean isNStraightHand(int[] hand, int groupSize) {
-        if(hand.length % groupSize != 0){
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        HashMap<Integer,Integer> map = new HashMap<>();
+
+        if(hand.length%groupSize != 0){
             return false;
         }
 
-        HashMap<Integer,Integer> map = new HashMap<>();
         for(int i = 0 ; i < hand.length ; i++){
             map.put(hand[i],map.getOrDefault(hand[i],0)+1);
         }
 
-        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
-        for(int key : map.keySet()){
-            minHeap.add(key);
-        }
+        pq.addAll(map.keySet());
 
-        while(!minHeap.isEmpty()){
-            int min = minHeap.peek();
+        while(!pq.isEmpty()){
+            int min = pq.peek();
             for(int i = 0 ; i < groupSize ; i++){
                 if(map.containsKey(min)){
                     map.put(min,map.get(min)-1);
                     if(map.get(min) == 0){
-                        minHeap.remove();
+                        map.remove(min);
+                        pq.remove(min);
                     }
                 }else{
                     return false;
                 }
-                if(map.get(min) == 0){
-                    map.remove(min);
-                }
                 min++;
             }
         }
@@ -55,73 +52,22 @@ class Solution {
     }
 }
 
-// import java.util.Arrays;
-// import java.util.ArrayList;
-import java.util.PriorityQueue;
-import java.util.Map;
-import java.util.HashMap;
 
-public class Hands_of_Straights {
-    public static boolean isNStraightHand(int[] hand, int groupSize) {
-        /*
-           // Solution 1: 
-           Arrays.sort(hand);
-           ArrayList<Integer> list = new ArrayList<>();
-           for(int i = 0; i < hand.length; i++){
-               list.add(hand[i]);
-           }
-           while(true){
-               int k = list.get(0);
-               for(int i = 0; i < groupSize; i++){
-                   if(list.size() != 0 && list.contains(k)){
-                       list.remove(Integer.valueOf(k));
-                   }
-                   else{
-                       return false;
-                   }
-                   k++;
-               }
-               if(list.size() == 0){
-                   break;
-               }
-           }
-           return true;
-        */
-        
-        // Solution 2: 
-        if(hand.length % groupSize != 0){
-            return false;
-        }
-        HashMap<Integer, Integer> map = new HashMap<>();
-        for(int i = 0; i < hand.length; i++){
-            map.put(hand[i], map.getOrDefault(hand[i], 0) + 1);
-        }
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
-        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
-            pq.add(entry.getKey());
-        }
-        while(!pq.isEmpty()){
-            int min = pq.peek();
-            for(int i = 0; i < groupSize; i++){
-                if(map.containsKey(min)){
-                    map.put(min, map.get(min) - 1);
-                    if(map.get(min) == 0){
-                        pq.remove();
-                    }
-                }
-                else{
-                    return false;
-                }
-                if(map.get(min) == 0){
-                    map.remove(min);
-                }
-                min++;
-            }
-        }
-        return true;
-    }
-    public static void main(String[] args) {
-        int[] hand = {1, 2, 3, 6, 2, 3, 4, 7, 8};
-        System.out.println(isNStraightHand(hand, 3));
-    }
-}
+
+⏱️ Time Complexity
+Let n = hand.length, k = groupSize, and m = number of unique cards.
+
+🔹 1. map.put(...) in loop → O(n)
+🔹 2. pq.addAll(map.keySet()) → O(m * log m)
+Since pq is a min-heap, adding all m keys takes O(m log m)
+   
+For each group:
+We do map.get/put → O(1)
+We do pq.remove(min) → O(m) in worst case (since PriorityQueue.remove(Object o) is O(n) internally, not O(log n)).
+So this loop takes O(n * m) in worst case.
+
+                                        Total TC :    O(n + m log m + n * m)
+                                           
+Resource	Complexity
+Time	O(n * m) (worst due to pq.remove())
+Space	O(m)
