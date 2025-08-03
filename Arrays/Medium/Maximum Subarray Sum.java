@@ -31,42 +31,23 @@
    Output: 1 
    Explanation: Array has only one element and which is giving positive sum of 1. 
 
- */
+       */
+                  
+      ✅ 1. Standard Kadane’s Algorithm (for arrays with possible negative numbers)
+      🔹 Goal: Find the maximum subarray sum (can be negative if all elements are negative).
 
-public class Maximum_Subarray_Sum {
-    public static int maxSubArray(int[] nums) {
-          
-        // BruteForce Solution: --> Time Complexity: O(N^2) & Space Complexity: O(1):
-          class Solution {
-                public int maxSubarraySum(int[] nums) {
-                    int maxSum = Integer.MIN_VALUE;
-                    
-                    for(int i = 0; i < nums.length; i++) {
-                        for(int j = i; j < nums.length; j++) {
-                            int sum = 0; // Reset sum for each subarray
-                            for(int k = i; k <= j; k++) {  // Iterate from i to j
-                                sum += nums[k];  // Add elements of subarray
-                            }
-                            maxSum = Math.max(maxSum, sum); // Track max sum
-                        }
-                    }
-                    return maxSum;
-                }
-            }
-
-        //Better
-            * In this we find all possible subarrays sum and then find the maximum among them.
-         * int maxSum = Integer.MIN_VALUE;
-           for(int i = 0; i < nums.length; i++){
-               int sum = 0;
-               for(int j = i; j < nums.length; j++){
-                   sum += nums[j];
-                   maxSum = Math.max(maxSum, sum);
-               }
-           }
-           return maxSum;
-
-        
+      public int maxSubArray(int[] nums) {
+          int maxSoFar = nums[0];
+          int maxEndingHere = nums[0];
+      
+          for (int i = 1; i < nums.length; i++) {
+              maxEndingHere = Math.max(nums[i], maxEndingHere + nums[i]);
+              maxSoFar = Math.max(maxSoFar, maxEndingHere);
+          }
+      
+          return maxSoFar;
+      }
+              
         // Optimized Solution: Using Kadane's algorithm
         // Time complexity: O(N) & Space Complexity: O(1).
             *** Kadane's Algo
