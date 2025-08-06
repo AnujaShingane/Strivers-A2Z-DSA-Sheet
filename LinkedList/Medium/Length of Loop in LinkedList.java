@@ -1,37 +1,30 @@
-class Node
-{
-    int data;
-    Node next;
-    Node(int d) {data = d; next = null; }
-}
+class Solution {
+    public int countNodesInLoop(ListNode head) {
+        ListNode slow = head, fast = head;
 
-*/
-
-//Function should return the length of the loop in LL.
-
-class Solution
-{
-    public static int countNodes(Node slow){
-        int res = 1;
-        Node node = slow;
-        while(node.next != slow){
-            res++;
-            node = node.next;
-        }
-        return res;
-    }
-    //Function to find the length of a loop in the linked list.
-    static int countNodesinLoop(Node head)
-    {
-        Node slow = head;
-        Node fast = head;
-        while(fast != null && fast.next != null){
+        // Step 1: Detect cycle
+        while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
-            if(slow == fast){
-                return countNodes(slow);
+
+            if (slow == fast) {
+                // Step 2: Count loop length
+                return countLoopLength(slow);
             }
         }
-        return 0;
+
+        return 0; // No loop
+    }
+
+    private int countLoopLength(ListNode nodeInLoop) {
+        ListNode temp = nodeInLoop;
+        int count = 1;
+
+        while (temp.next != nodeInLoop) {
+            count++;
+            temp = temp.next;
+        }
+
+        return count;
     }
 }
