@@ -57,27 +57,54 @@ public class Ceil_in_a_Binary_Search_Tree {
         }
         return ceil;
     }
-    public static void main(String[] args) {
-        /*
-            Visualisation of the tree in real world
-                     10
-                   /  \
-                 7     30
-                / \   / \
-               4   9 20  35
-                  /     / \
-                 8    31    400
-        */
-        Node root = new Node(10);
-        root.left = new Node(7);
-        root.right = new Node(30);
-        root.left.left = new Node(4);
-        root.left.right = new Node(9);
-        root.left.right.left = new Node(8);
-        root.right.left = new Node(20);
-        root.right.right = new Node(35);
-        root.right.right.left = new Node(31);
-        root.right.right.right = new Node(40);
-        System.out.println(findCeil(root, 5));
+    import java.util.* ;
+import java.io.*; 
+/************************************************************
+
+    Following is the TreeNode class structure
+
+    class TreeNode<T>
+    {
+       public:
+        T data;
+        TreeNode<T> left;
+        TreeNode<T> right;
+
+        TreeNode(T data)
+        {
+            this.data = data;
+            left = null;
+            right = null;
+        }
+    };
+
+************************************************************/
+
+public class Solution {
+
+    public  static int findCeil(TreeNode<Integer> node, int x) {
+        int ceil = -1;
+        if(node.data == x)return x;
+        if(node.data < x){
+            while(node != null){
+                if(node.data >= x){
+                    ceil = node.data;
+                    node = node.left;
+                }else if(node.data < x){
+                    node = node.right;
+                }
+            }
+        }else{
+            while(node != null){
+                if(node.data >= x){
+                    ceil = node.data;
+                    node = node.left;
+                }else if(node.data < x){
+                    node = node.right;
+                }
+            }
+        }
+        return ceil;
     }
 }
+
