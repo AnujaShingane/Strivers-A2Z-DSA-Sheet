@@ -42,55 +42,49 @@
     [2, 3, 1, 0] is also another topological sorting for the graph.
 */
 
-import java.util.ArrayList;
-import java.util.Stack;
-import java.util.Arrays;
 
-public class Topological_sort {
-    /*
+class Solution {
+     /*
      * Time Complexity: O(N + E)
      * Space Complexity: O(N)
      */
-
-    // DFS
-    public static void dfs(int node, ArrayList<ArrayList<Integer>> adj, int[] vis, Stack<Integer> st){
-        vis[node] = 1;
-        for(int it : adj.get(node)){
-            if(vis[it] == 0){
-                dfs(it, adj, vis, st);
-            }
-        }
-        st.push(node);
-    }
-
-    //Function to return list containing vertices in Topological order. 
-    public static int[] topoSort(int n, ArrayList<ArrayList<Integer>> adj) {
-        int[] vis = new int[n];
+    public ArrayList<Integer> topoSort(int V, int[][] edges) {
         Stack<Integer> st = new Stack<>();
-        for(int i = 0; i < n; i++){
-            if(vis[i] == 0){
-                dfs(i, adj, vis, st);
+        boolean[] vis = new boolean[V];
+        
+        ArrayList<ArrayList<Integer>> adj = adj(V,edges);
+        
+        for(int i = 0 ; i < V ; i++){
+            if(!vis[i]){
+                dfs(i,vis,adj,st);
             }
         }
-        int[] res = new int[n];
-        int i = 0;
+        
+        ArrayList<Integer> ans = new ArrayList<>();
         while(!st.isEmpty()){
-            res[i++] = st.pop();
+            ans.add(st.pop());
         }
-        return res;
+        return ans;
     }
-    public static void main(String[] args) {
-        int n = 6;
+    
+    public ArrayList<ArrayList<Integer>> adj(int V,int[][] edges){
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            adj.add(new ArrayList<>());
+        for(int i=0 ; i < V ; i++)adj.add(new ArrayList<>());
+        
+        for(int[] arr : edges){
+            adj.get(arr[0]).add(arr[1]);
         }
-        adj.get(2).add(3);
-        adj.get(3).add(1);
-        adj.get(4).add(0);
-        adj.get(4).add(1);
-        adj.get(5).add(0);
-        adj.get(5).add(2);
-        System.out.println(Arrays.toString(topoSort(n, adj)));
+        return adj;
     }
+    
+    public void dfs(int node,boolean[] vis,ArrayList<ArrayList<Integer>> adj,Stack<Integer> st){
+        vis[node]=true;
+        for(int ele : adj.get(node)){
+            if(!vis[ele]){
+                dfs(ele,vis,adj,st);
+                vis[ele]=true;
+            }
+        }
+        st.push(node);//backtracking
+    } 
 }
