@@ -1,3 +1,10 @@
+Use vis, adj list -> try to solve depth wise 
+   starting node then all nodes in depth depth depth
+
+
+
+
+
 /*
    Depth First Search (DFS) of Graph
    Save Today, Earn More Tomorrow. Get 25% off on Complete Interview Preparation  
