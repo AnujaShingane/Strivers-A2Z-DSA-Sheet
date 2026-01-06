@@ -1,3 +1,11 @@
+Use vis, queue, adj list -> try to solve level wise 
+   starting node then all nodes in level 1 then 2 then 3 ans so on.
+
+
+
+
+
+
 /*
    Q. Breadth First Search (BFS) In Graph.
    Given a directed graph. The task is to do Breadth First Traversal of this graph starting from 0.
