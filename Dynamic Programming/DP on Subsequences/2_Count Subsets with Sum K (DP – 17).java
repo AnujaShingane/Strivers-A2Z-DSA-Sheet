@@ -22,6 +22,14 @@
 
 // import java.util.Arrays;
 
+
+Problem                                                     Convert to
+    
+Count Subsets with Sum K	                ---->         target = K
+Target Sum	                                ---->         target = (totalSum + target) / 2
+Count Partitions with Given Difference      ---->         target = (totalSum − diff) / 2
+
+
 Recursion ->
 
 int f(int i, int target, int[] arr){
