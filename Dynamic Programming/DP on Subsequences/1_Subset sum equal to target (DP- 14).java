@@ -23,6 +23,13 @@
     Explanation: There is no subset with sum 30.
 */
 
+JUST DO ->
+
+totalSum = sum of array
+if(totalSum is odd → false)
+target = totalSum / 2
+
+
 public class Subset_sum_equal_to_target {
     /*
        // Recursion
