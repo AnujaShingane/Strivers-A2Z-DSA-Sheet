@@ -20,6 +20,13 @@
     Subset2 = {4}, sum of Subset2 = 4
 */
 
+JUST DO->
+
+totalSum = sum of array
+if(totalSum is odd → false)
+target = totalSum / 2
+
+
 public class Partition_Set_Into_2_Subsets_With_Min_Absolute_Sum_Diff {
     /* 
         // tabulation (Visualizaiton -> https://www.youtube.com/watch?v=GS_OqZb2CWc)
