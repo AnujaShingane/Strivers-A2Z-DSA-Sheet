@@ -22,151 +22,89 @@
 
 // import java.util.Arrays;
 
-public class Count_Subsets_with_Sum_K {
-    /*
-       // Recursion
-       static int mod = (int)(1e9 + 7);
-       public static int helper(int i, int[] arr, int target){
-           if(i < 0) {
-               if(target == 0) return 1;
-               return 0;
-           }
-           
-           // take 
-           int take = 0;
-           if(target >= arr[i]) take = helper(i - 1, arr, target - arr[i]);
-           
-           // notTake
-           int notTake = helper(i - 1, arr, target);
-           
-           return ((take % mod) + (notTake % mod)) % mod;
-       }
-   
-	   public static int perfectSum(int[] arr,int n, int sum) { 
-	       return helper(n - 1, arr, sum) % mod;
-	   } 
-    */
+Recursion ->
 
-    /*
-       // Memoization
-       static int mod = (int)(1e9 + 7);
-        public static int helper(int i, int[] arr, int target, int[][] dp){
-            if(i < 0) {
-                if(target == 0) return 1;
-                return 0;
-            }
-            
-            if(dp[i][target] != -1) return dp[i][target];
-            
-            // take 
-            int take = 0;
-            if(target >= arr[i]) take = helper(i - 1, arr, target - arr[i], dp);
-            
-            // notTake
-            int notTake = helper(i - 1, arr, target, dp);
-            
-            return dp[i][target] = ((take % mod) + (notTake % mod)) % mod;
-        }
-	    public static int perfectSum(int[] arr,int n, int sum) {
-	        int[][] dp = new int[n][sum + 1];
-	        for(int[] it : dp) Arrays.fill(it, -1);
-	        return helper(n - 1, arr, sum, dp) % mod;
-	    } 
-    */
-
-    /*
-       // Tabulation
-       public static void reverseArray(int[] arr, int start, int end) {
-           while (start < end) {
-               int temp = arr[start];
-               arr[start] = arr[end];
-               arr[end] = temp;
-       
-               start++;
-               end--;
-           }
-       }
-	   public static int perfectSum(int[] arr,int n, int target) {
-           
-           // for tabulation specific approach
-           // for array: {0, 0, 0, 0, 0, 0, 0, 0, 1}
-           // it will only count all subarrys because it's starting with 0
-           // so we will reverse array if it is starting from 0
-   
-	       if(arr[0] == 0) reverseArray(arr, 0, arr.length - 1);
-	       
-	       int mod = (int)(1e9 + 7);
-	       int[][] dp = new int[n][target + 1];
-	       for(int i = 0; i < n; i++) dp[i][0] = 1;
-	       
-	       if(arr[0] <= target) dp[0][arr[0]] = 1;
-	       
-	       for(int i = 1; i < n; i++){
-	           for(int sum = 0; sum <= target; sum++){
-	               // take
-	               int take = 0;
-	               if(sum >= arr[i]) take = dp[i - 1][sum - arr[i]];
-           
-                   // notTake
-                   int notTake = dp[i - 1][sum];
-                   
-                   dp[i][sum] = ((take % mod) + (notTake % mod)) % mod;
-	           }
-	       }
-	       
-	       return dp[n - 1][target] % mod;
-	   } 
-    */
-    
-    // Space Optimization
-    public static void reverseArray(int[] arr, int start, int end) {
-        while (start < end) {
-            int temp = arr[start];
-            arr[start] = arr[end];
-            arr[end] = temp;
-    
-            start++;
-            end--;
-        }
+int f(int i, int target, int[] arr){
+    if(i == 0){
+        if(target == 0 && arr[0] == 0) return 2; // take or not take zero
+        if(target == 0 || target == arr[0]) return 1;
+        return 0;
     }
-	public static int perfectSum(int[] arr,int n, int target) {
 
-        // for tabulation specific approach
-        // for array: {0, 0, 0, 0, 0, 0, 0, 0, 1}
-        // it will only count all subarrys because it's starting with 0
-        // so we will reverse array if it is starting from 0
+    int notTake = f(i-1, target, arr);
+    int take = 0;
+    if(arr[i] <= target)
+        take = f(i-1, target - arr[i], arr);
 
-	    if(arr[0] == 0) reverseArray(arr, 0, arr.length - 1);
-	    
-	    int mod = (int)(1e9 + 7);
-	    
-	    int[] prev = new int [target + 1];
-	    int[] curr = new int[target + 1];
-	    
-	    prev[0] = curr[0] = 1;
-	    
-	    if(arr[0] <= target) prev[arr[0]] = 1;
-	    
-	    for(int i = 1; i < n; i++){
-	        for(int sum = 0; sum <= target; sum++){
-	            // take
-	            int take = 0;
-	            if(sum >= arr[i]) take = prev[sum - arr[i]];
-        
-                // notTake
-                int notTake = prev[sum];
-                
-                curr[sum] = ((take % mod) + (notTake % mod)) % mod;
-	        }
-	        prev = curr.clone();
-	    }
-	    
-	    return prev[target] % mod;
-	} 
+    return take + notTake;
+}
 
-    public static void main(String[] args) {
-        int N = 9, sum = 1;
-        int[] arr = {0, 0, 0, 0, 0, 0, 0, 0, 1};
-        System.out.println(perfectSum(arr, N, sum));
+
+
+Memoization -> 
+
+ Integer[][] dp;
+
+int f(int i, int target, int[] arr){
+    if(i == 0){
+        if(target == 0 && arr[0] == 0) return 2;
+        if(target == 0 || target == arr[0]) return 1;
+        return 0;
+    }
+
+    if(dp[i][target] != null) return dp[i][target];
+
+    int notTake = f(i-1, target, arr);
+    int take = 0;
+    if(arr[i] <= target)
+        take = f(i-1, target - arr[i], arr);
+
+    return dp[i][target] = take + notTake;
+}
+
+
+Tabulation ->
+
+int[][] dp = new int[n][target+1];
+
+if(arr[0] == 0) dp[0][0] = 2;
+else dp[0][0] = 1;
+
+if(arr[0] != 0 && arr[0] <= target)
+    dp[0][arr[0]] = 1;
+
+for(int i=1;i<n;i++){
+    for(int t=0;t<=target;t++){
+        int notTake = dp[i-1][t];
+        int take = 0;
+        if(arr[i] <= t)
+            take = dp[i-1][t - arr[i]];
+        dp[i][t] = take + notTake;
     }
 }
+return dp[n-1][target];
+
+
+    
+Space Optimization ->
+
+int[] prev = new int[target+1];
+
+if(arr[0] == 0) prev[0] = 2;
+else prev[0] = 1;
+
+if(arr[0] != 0 && arr[0] <= target)
+    prev[arr[0]] = 1;
+
+for(int i=1;i<n;i++){
+    int[] cur = new int[target+1];
+    for(int t=0;t<=target;t++){
+        int notTake = prev[t];
+        int take = 0;
+        if(arr[i] <= t)
+            take = prev[t - arr[i]];
+        cur[t] = take + notTake;
+    }
+    prev = cur;
+}
+return prev[target];
