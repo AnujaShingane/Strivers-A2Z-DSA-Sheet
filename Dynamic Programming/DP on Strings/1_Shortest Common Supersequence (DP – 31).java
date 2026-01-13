@@ -23,7 +23,12 @@
 */
 
 
-
+--> It is whole lcs tabu code then we know len of str going to be (n+m)-dp[n][m] 
+    So to print once if equal i-- j-- else if > print i-- if another > print j-- 
+    while i>0 print i--
+    while j>0 print j--
+    check code
+    
 class Solution {
     public String shortestCommonSupersequence(String str1, String str2) {
         int n = str1.length();
@@ -42,6 +47,9 @@ class Solution {
             }
         }
 
+
+        //print
+        
         int i = n;
         int j = m;
         StringBuilder sb = new StringBuilder();
