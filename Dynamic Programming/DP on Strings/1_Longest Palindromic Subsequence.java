@@ -20,85 +20,65 @@
 */
 
 // import java.util.Arrays;
-
-import java.util.Arrays;
-
-public class Longest_Palindromic_Subsequence {
-    /*
-       Method 1
-       _________________________________________________________________
-
-       // Recursion
-       public static int helper(String s, int i, int j){
-           if(i == j) return 1;
-   
-           // if there is string of size 2 and both character are equal
-           if(j - i == 1 && s.charAt(i) == s.charAt(j)) return 2;
-   
-           // if first and last characters are equal
-           if(s.charAt(i) == s.charAt(j)){
-               return 2 + helper(s, i + 1, j - 1);
-           }
-   
-           return Math.max(helper(s, i + 1, j), helper(s, i, j - 1));
-       }
-       public static int longestPalindromeSubseq(String s) {
-           return helper(s, 0, s.length() - 1);
-       }
-
-    */
-    
-    // Memoization
-    
-    public static int helper(String s, int i, int j, int[][] dp){
-        if(i == j) return 1;
-   
-        if(dp[i][j] != -1) return dp[i][j];
-   
-        // if length is 2 and both charcter are equals
-        if((j - i + 1) == 2 && s.charAt(i) == s.charAt(j)) return 2;
-        
-        // if first and last characters are equal then call for the remaining string
-        if(s.charAt(i) == s.charAt(j)) {
-            return dp[i][j] = 2 + helper(s, i + 1, j - 1, dp);
-        }
-   
-        return dp[i][j] = Math.max(helper(s, i + 1, j, dp), helper(s, i, j - 1, dp));
-    }
-
-    public static int longestPalindromeSubseq(String s) {
+class Solution {
+    public int longestPalindromeSubseq(String s) {
         int n = s.length();
-        int[][] dp = new int[n][n];
-        for(int[] it : dp) Arrays.fill(it, -1);
-        return helper(s, 0, n - 1, dp);
+        int[][] dp = new int[n+1][n+1];
+        for(int[] arr : dp){
+            Arrays.fill(arr,-1);
+        }
+
+
+        return func(0,n-1,s,dp);
     }
 
-    /*
-        // Method 2 (Use lcs -> longest common subsequence)
-        
-        we have String 
-        s = "bbabcbcab"
 
-        let s1 = "bbabcbcab" and s2 = reverse(s1);
+    public int func(int i, int j,String s,int[][] dp) {
+        if(i==j)return 1;
+        if(i>j)return 0;
 
-        s1 = "bbabcbcab"
-        s2 = "bacbcbabb"
 
-        find lcs to get the longest Palindrome Subsequences.
-        
-        Intution: Now the longest subsequnce will be the longest common subsequence 
-                  because any other longest subtring will alter after reversing the string
-                  except the palindromic substring because palindrom are same after reversing.
-
-        code to find the lcs:          
-        
-        lcs: https://github.com/ManishK4514/Strivers-A2Z-DSA-Sheet/blob/main/Dynamic%20Programming/DP%20on%20Strings/Longest%20Common%20Subsequence.java          
-    */
-
-    
-
-    public static void main(String[] args) {
-        String s = "bbbab";
-        System.out.println(longestPalindromeSubseq(s));
+        if(dp[i][j]!=-1)return dp[i][j];
+       
+        int ans = 0;
+        if(s.charAt(i)==s.charAt(j)){
+            ans = 2+func(i+1,j-1,s,dp);
+        }else{
+            ans = Math.max(func(i+1,j,s,dp),func(i,j-1,s,dp));
+        }
+       
+        return dp[i][j] = ans;
     }
 }
+
+
+
+
+
+
+//tabulation
+
+
+class Solution {
+    public int longestPalindromeSubseq(String s) {
+        int n = s.length();
+        int[][] dp = new int[n][n];
+
+        for(int i = 0 ; i < n ; i++){
+            dp[i][i]=1;
+        }
+
+        for(int i = n-1 ; i >= 0  ; i--){
+            for(int j = i+1 ; j < n ; j++){
+                if(s.charAt(i)==s.charAt(j)){
+                    dp[i][j] = 2+dp[i+1][j-1];
+                }else{
+                    dp[i][j] = Math.max(dp[i+1][j],dp[i][j-1]);
+                }
+            }
+        }
+       
+        return dp[0][n-1];
+    }
+}
+
