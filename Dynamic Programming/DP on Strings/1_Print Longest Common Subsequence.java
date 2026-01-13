@@ -1,45 +1,20 @@
 /*
-    Q. Print Longest Common Subsequence | (DP – 26)
-    Problem Statement: 
-    
-    Print Longest Common Subsequence
-    
-    In the previous article Longest Common Subsequence, we learned to print the length of the longest common subsequence of two strings. In this article, we will learn to print the actual string of the longest common subsequence. 
-    
-    Prereq: Longest Common Subsequence
-    
-    Intuition:
-    
-    Let us consider the following example:
-    
-    We will continue from where we left in the article DP-25. There in the tabulation approach, we declared a dp array and dp[n][m] will have the length of the longest common subsequence., i.e dp[n][m] = 3.
-    
-    Now, with help of two nested loops, if we print the dp array, it will look like this:
-    
-    
-    Here dp[5][5] gives us the length of the longest common subsequence: 3.
-    
-    Now let us try to form the string itself. We know its length already. We give it the name str.
-    
-    
-    We will use the dp array to form the LCS string. For that, we need to think, about how did the dp array was originally filled. The tabulation approach used 1-based indexing. We also write the characters corresponding to the indexes of the dp array:
-    
-    
-    Now, let us see what were the conditions that we used while forming the dp array:
-    
-    if(S1[i-1] == S2[j-1]), then return 1 + dp[i-1][j-1]
-    if(S1[i-1] != S2[j-1]) , then return 0 + max(dp[i-1][j],dp[i][j-1])
-    These two conditions along with the dp array give us all the required information required to print the LCS string.
-    
-    Approach:
-    The algorithm approach is stated below:
-    
-    -> We will fill the string str from the last by maintaining a pointer. 
-    -> We will start from the right-most cell of the dp array, initially i=n and j=m.
-    -> At every cell, we will check if S1[i-1] == S2[j-1], if it is then it means this character is a part of the longest common substring. So we will push it to the str (at last). Then we will move to the diagonally top-left(↖)  cell by assigning i to i-1 and j to j-1.
-    -> Else, this character is not a part of the longest common subsequence. It means that originally this cell got its value from its left cell (←) or from its top cell (↑). Whichever cell’s value will be more of the two, we will move to that cell.
-    -> We will continue till i>0 and j>0, failing it we will break from the loop.
-    -> At last we will get our lcs string in “str”.
+Problem statement
+You are given two strings ‘s1’ and ‘s2’.
+
+Return the longest common subsequence of these strings.
+If there’s no such string, return an empty string. If there are multiple possible answers, return any such string.
+
+Note:
+Longest common subsequence of string ‘s1’ and ‘s2’ is the longest subsequence of ‘s1’ that is also a subsequence of ‘s2’. A ‘subsequence’ of ‘s1’ is a string that can be formed by deleting one or more (possibly zero) characters from ‘s1’.
+
+Example:
+Input: ‘s1’  = “abcab”, ‘s2’ = “cbab”
+
+Output: “bab”
+
+Explanation:
+“bab” is one valid longest subsequence present in both strings ‘s1’ , ‘s2’.
 */
 
 
