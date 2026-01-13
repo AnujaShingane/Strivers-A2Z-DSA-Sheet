@@ -42,44 +42,43 @@
     -> At last we will get our lcs string in “str”.
 */
 
-public class Print_Longest_Common_Subsequence {
-    public static void lcs(String s1, String s2){
-        int n = s1.length(), m = s2.length();
+import java.util.*;
 
-        int[][] dp = new int[n + 1][m + 1];
+public class Solution {
+    public static String findLCS(int n, int m, String s1, String s2){
+        int[][] dp = new int[n+1][m+1];
+        for(int[] arr : dp)Arrays.fill(arr,-1);
 
-        for(int i = 1; i <= n; i++){
-            for(int j = 1; j <= m; j++){
-                if(s1.charAt(i - 1) == s2.charAt(j - 1)){
-                    dp[i][j] = 1 + dp[i - 1][j - 1];
-                }
-                else dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
-            }
-        }
-
-        int len = dp[n][m];
-        int i = n, j = m, idx = len - 1;
+        for(int i = 0 ; i <= n ; i++)dp[i][0]=0;
+        for(int i = 0 ; i <= m ; i++)dp[0][i]=0;
         
-        StringBuilder ans = new StringBuilder();
-        for(int k = 1; k <= len; k++){
-            ans.append("&"); // dummy character
-        }
+        int ans = 0;
+        for(int i = 1 ; i <= n ; i++){
+            for(int j = 1 ; j <= m ; j++){
+                if(s1.charAt(i-1)==s2.charAt(j-1)){
+                    ans = 1+dp[i-1][j-1];
+                }else{
+                    ans = Math.max(dp[i-1][j],dp[i][j-1]);
+                }
 
-        while(i > 0 && j > 0){
-            if(s1.charAt(i - 1) == s2.charAt(j - 1)){
-                ans.setCharAt(idx, s1.charAt(i - 1));
-                i--; j--; idx--;
+                dp[i][j]=ans;
             }
-            else if(dp[i - 1][j] > dp[i][j - 1]) i--;
-            else j--;
         }
 
-        System.out.println(ans);
-    }
-    public static void main(String[] args) {
-        String s1= "abcde";
-        String s2= "bdgek";
+        int len = dp[n-1][m-1];
+        StringBuilder sb = new StringBuilder();
 
-        lcs(s1, s2);
+        int i = n;
+        int j = m;
+        while(i>0 && j>0){
+            if(s1.charAt(i-1)==s2.charAt(j-1)){
+                sb.append(s1.charAt(i-1));
+                i--;j--;
+            }else if(dp[i-1][j]>dp[i][j-1]){
+                i--;
+            }else j--;
+        }
+
+        return sb.reverse().toString();
     }
 }
