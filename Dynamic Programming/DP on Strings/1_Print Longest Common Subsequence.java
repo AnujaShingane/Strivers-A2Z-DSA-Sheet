@@ -42,6 +42,13 @@
     -> At last we will get our lcs string in “str”.
 */
 
+
+
+--> It is whole lcs tabu code then we know len of str going to be dp[n][m] 
+    So to print if equal i-- j-- else if > i-- if another > j-- 
+    check code
+
+
 import java.util.*;
 
 public class Solution {
@@ -65,6 +72,7 @@ public class Solution {
             }
         }
 
+        //to print
         int len = dp[n-1][m-1];
         StringBuilder sb = new StringBuilder();
 
