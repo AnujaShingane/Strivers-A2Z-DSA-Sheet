@@ -30,7 +30,7 @@
 // import java.util.Arrays;
 
 public class Longest_Common_Subsequence {
-    /*
+    
        // Recursion
        public static int helper(String text1, String text2, int i, int j){
            if(i < 0 || j < 0) return 0;
@@ -49,9 +49,9 @@ public class Longest_Common_Subsequence {
            int n = text1.length(), m = text2.length();
            return helper(text1, text2, n - 1, m - 1);
        }
-    */
+    
 
-    /*
+    
        // Memoization
        public static int helper(String text1, String text2, int i, int j, int[][] dp){
            if(i < 0 || j < 0) return 0;
@@ -100,7 +100,7 @@ public class Longest_Common_Subsequence {
        }
     */
 
-    /*
+    
        // Tabulation
        public static int longestCommonSubsequence(String text1, String text2) {
            int n = text1.length(), m = text2.length();
