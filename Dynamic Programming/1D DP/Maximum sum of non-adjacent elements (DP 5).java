@@ -36,7 +36,7 @@ public class Maximum_sum_of_non_adjacent_elements {
            int a = arr[idx] + maxSum(arr, idx - 2);
            
            // not pick
-           int b = 0 + maxSum(arr, idx - 2);
+           int b = 0 + maxSum(arr, idx - 1);
            
            return Math.max(a, b);
        }
