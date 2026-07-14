@@ -39,10 +39,14 @@
 public class Climbing_Stars {
     /* 
         // Recursion
-        public static int count(int idx){
-            if(idx == 0) return 1;
-            if(idx < 0) return 0;
-            return count(idx - 1) + count(idx - 2);
+        public static int count(int ind){
+            if(ind == 0) return 1;
+            if(ind < 0) return 0;
+
+            int one = count(ind-1);
+            int two = count(ind-2);
+            
+            return one +two;
         }
         public static int climbStairs(int n) {
             return count(n);
