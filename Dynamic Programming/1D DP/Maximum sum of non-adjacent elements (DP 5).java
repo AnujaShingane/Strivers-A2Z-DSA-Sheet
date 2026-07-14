@@ -1,7 +1,8 @@
 /*
     Q. Maximum sum of non-adjacent elements (DP 5)
     Practice : https://practice.geeksforgeeks.org/problems/max-sum-without-adjacents2430/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=max-sum-without-adjacents
-    Given an array Arr of size N containing positive integers. Find the maximum sum of a subsequence such that no two numbers in the sequence should be adjacent in the array.
+    Given an array Arr of size N containing positive integers. 
+    Find the maximum sum of a subsequence such that no two numbers in the sequence should be adjacent in the array.
 
     Example 1:
     
