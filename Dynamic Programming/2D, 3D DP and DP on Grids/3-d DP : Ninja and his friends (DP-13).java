@@ -4,7 +4,8 @@
 
     // This solution and example (Chocolates Pickup on gfg) is the same problem as Ninja and his friends
 
-    You are given an r rows and c cols matrix grid representing a field of cherries where grid[i][j] represents the number of chocolates that you can collect from the (i, j) cell.
+    You are given an r rows and c cols matrix grid representing a field of cherries where grid[i][j] 
+    represents the number of chocolates that you can collect from the (i, j) cell.
 
     You have two robots that can collect chocolates for you:
     
