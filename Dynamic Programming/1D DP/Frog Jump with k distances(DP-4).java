@@ -1,7 +1,9 @@
 /*
     Q. Dynamic Programming: Frog Jump with k Distances (DP 4)
     Practice : https://practice.geeksforgeeks.org/problems/minimal-cost/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=minimal-cost
-    There are n stones and an array of heights and Geek is standing at stone 1 and can jump to one of the following: Stone i+1, i+2, ... i+k stone and cost will be [hi-hj] is incurred, where j is the stone to land on. Find the minimum possible total cost incurred before the Geek reaches Stone N.
+    There are n stones and an array of heights and Geek is standing at stone 1 
+    and can jump to one of the following: Stone i+1, i+2, ... i+k stone and cost will be [hi-hj] is incurred,
+    where j is the stone to land on. Find the minimum possible total cost incurred before the Geek reaches Stone N.
 
     Example 1:
     Input:
