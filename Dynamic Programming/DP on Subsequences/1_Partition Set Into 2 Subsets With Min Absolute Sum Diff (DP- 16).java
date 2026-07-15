@@ -31,6 +31,59 @@ diff = |totalSum - 2*S1|
 We want minimum diff
 
 
+Memoization ->
+class Solution {
+
+    public int minDifference(int arr[]) {
+
+        int n = arr.length;
+
+        int totalSum = 0;
+        for (int x : arr)
+            totalSum += x;
+
+        int[][] dp = new int[n][totalSum + 1];
+
+        for (int[] row : dp)
+            Arrays.fill(row, -1);
+
+        int ans = Integer.MAX_VALUE;
+
+        for (int s1 = 0; s1 <= totalSum; s1++) {
+
+            if (func(n - 1, s1, arr, dp)) {
+                ans = Math.min(ans, Math.abs(totalSum - 2 * s1));
+            }
+
+        }
+
+        return ans;
+    }
+
+    boolean func(int ind, int target, int[] arr, int[][] dp) {
+
+        if (target == 0)
+            return true;
+
+        if (ind == 0)
+            return arr[0] == target;
+
+        if (dp[ind][target] != -1)
+            return dp[ind][target] == 1;
+
+        boolean notTake = func(ind - 1, target, arr, dp);
+
+        boolean take = false;
+        if (arr[ind] <= target)
+            take = func(ind - 1, target - arr[ind], arr, dp);
+
+        dp[ind][target] = (take || notTake) ? 1 : 0;
+
+        return take || notTake;
+    }
+}
+
+	
 Tabulation ->
 
 boolean[][] dp = new boolean[n][sum+1];
