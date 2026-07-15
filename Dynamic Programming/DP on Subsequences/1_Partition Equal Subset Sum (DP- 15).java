@@ -2,7 +2,8 @@
     Q. Partition Equal Subset Sum (DP- 15)
     Practice : https://leetcode.com/problems/partition-equal-subset-sum/description/
 
-    Given an integer numsay nums, return true if you can partition the numsay into two subsets such that the sum of the elements in both subsets is equal or false otherwise.
+    Given an integer numsay nums, return true if you can partition the numsay into two subsets such that 
+    the sum of the elements in both subsets is equal or false otherwise.
 
     Example 1:
     
