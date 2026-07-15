@@ -2,9 +2,11 @@
     Q. Count Partitions with Given Difference (DP – 18)
     Practice : https://practice.geeksforgeeks.org/problems/partitions-with-given-difference/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=partitions-with-given-difference
 
-    Given an array arr, partition it into two subsets(possibly empty) such that their union is the original array. Let the sum of the element of these two subsets be S1 and S2. 
+    Given an array arr, partition it into two subsets(possibly empty) such that their union is the original array. 
+    Let the sum of the element of these two subsets be S1 and S2. 
 
-    Given a difference d, count the number of partitions in which S1 is greater than or equal to S2 and the difference S1 and S2 is equal to d. since the answer may be large return it modulo 109 + 7.
+    Given a difference d, count the number of partitions in which S1 is greater than or equal to S2 
+    and the difference S1 and S2 is equal to d. since the answer may be large return it modulo 109 + 7.
     
     Example 1:
     
