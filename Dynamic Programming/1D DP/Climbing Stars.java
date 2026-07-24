@@ -55,7 +55,7 @@ public class Climbing_Stars {
 Space Complexity: O(n) (recursion stack)
     
     /* 
-        // Memorization
+        // Memoization
         public static int count(int idx, int[] dp){
             if(idx == 0) return 1;
             if(idx < 0) return 0;
