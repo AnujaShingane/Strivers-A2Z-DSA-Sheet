@@ -51,7 +51,8 @@ public class Climbing_Stars {
         public static int climbStairs(int n) {
             return count(n);
         }
-    */
+    */Time Complexity: O(2ⁿ) (or more precisely O(1.618ⁿ))
+Space Complexity: O(n) (recursion stack)
     
     /* 
         // Memorization
@@ -66,7 +67,10 @@ public class Climbing_Stars {
             Arrays.fill(dp, -1);
             return count(n, dp);
         }
-    */
+    */Time Complexity: O(n)
+Space Complexity: O(n) + O(n) = O(n)
+O(n) for the DP array.
+O(n) for the recursion call stack.
     
     /* 
         // Tabulation
@@ -79,7 +83,8 @@ public class Climbing_Stars {
             }
             return dp[n];
         }
-    */
+    */Time Complexity: O(n)
+Space Complexity: O(n)
 
     // Space Optimization
     public static int climbStairs(int n) {
